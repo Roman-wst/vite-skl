@@ -1,0 +1,239 @@
+@use 'sass:math';
+
+// vars
+// colors
+$text-color: #0E0E10;
+$primary-color: #33D35E;
+
+$header-color: #55555C;
+$header-bg-color: #0E0E10;
+
+$title-color: #F1F4FD;
+
+// btns
+$btn-bg-primary: $text-color;
+$btn-bg-accent: $primary-color;
+$btn-bg-hover: #24C14E;
+$btn-bg-active: #16B240;
+
+// breakpoints
+$screen-xxl-min: 1920px;
+
+$screen-xlg-min: 1440px;
+
+$screen-lg-max: $screen-xlg-min - 0.02;
+$screen-lg-min: 1024px;
+
+$screen-md-max: $screen-lg-min - 0.02;
+$screen-md-min: 768px;
+
+$screen-sm-max: $screen-md-min - 0.02;
+$screen-sm-min: 576px;
+
+$screen-xsm-max: $screen-sm-min - 0.02;
+
+// fonts
+$font-bold: 'GothamProBold', 'Arial Black';
+$font-medium: 'GothamProMedium', 'Arial Medium';
+
+@font-face {
+  font-family: 'GothamPro';
+  src: url('@/assets/fonts/gothampro.woff2') format('woff2'),
+       url('@/assets/fonts/gothampro.woff') format('woff'),
+       url('@/assets/fonts/gothampro.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: 'GothamProBold';
+  src: url('@/assets/fonts/gothamprobold.woff2') format('woff2'),
+       url('@/assets/fonts/gothamprobold.woff') format('woff'),
+       url('@/assets/fonts/gothamprobold.ttf')  format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: 'GothamProMedium';
+  src: url('@/assets/fonts/gothampromedium.woff2') format('woff2'),
+       url('@/assets/fonts/gothampromedium.woff') format('woff'),
+       url('@/assets/fonts/gothampromedium.ttf')  format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+    font-family: 'Icons';
+    src: url('@/assets/fonts/Icons.woff2') format('woff2'),
+        url('@/assets/fonts/Icons.ttf') format('truetype'),
+        url('@/assets/fonts/Icons.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@function rem($px) {
+  @return math.div($px, 16) + rem;
+}
+
+@function vw($px) {
+  @return $px * math.div(100, 1728) + vw;
+}
+
+@mixin font($size, $line-height) {
+  font-size: rem($size);
+  line-height: rem($line-height);
+}
+
+@mixin fontClamp($size, $line-height, $size2, $line-height2) {
+  font-size: clamp(rem($size), vw($size2), rem($size2));
+  line-height: clamp(rem($line-height), vw($line-height2), rem($line-height2));
+}
+
+@function clmp($dim1, $dim2) {
+  @return clamp(rem($dim1), vw($dim2), rem($dim2));
+}
+
+@mixin dim($w, $h) {
+  width: rem($w);
+  height: rem($h);
+}
+
+@mixin media-min($point) {
+  @media screen and (min-width: $point) {
+    @content;
+  }
+}
+
+@mixin media-max($point) {
+  @media screen and (max-width: $point) {
+    @content;
+  }
+}
+
+@mixin media-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+.icon, [class^="icon-"], [class*=" icon-"] {
+    /* Use !important to prevent extensions from overriding this font. */
+    font-family: "Icons" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-bottom-sort:before {
+    content: "\f009";
+}
+.icon-search:before {
+    content: "\f001";
+}
+.icon-docs:before {
+    content: "\f002";
+}
+.icon-dash:before {
+    content: "\f003";
+    font-size: 2px;
+}
+.icon-check:before {
+    content: "\f004";
+}
+.icon-calendar:before {
+    content: "\f005";
+}
+.icon-arrow-top-sort:before {
+    content: "\f006";
+}
+.icon-arrow-right:before {
+    content: "\f007";
+}
+.icon-arrow-left:before {
+    content: "\f008";
+}
+.icon-arrow-select:before {
+    content: "\f000";
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: rem(1728);
+  margin: 0 auto;
+  padding: 0 clmp(16, 48);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-bold;
+  margin: 0;
+}
+
+h1 { 
+  color: $title-color;
+}
+
+h1, .h1 { @include fontClamp(40, 48, 56, 62);}
+h2 { @include fontClamp(36, 44, 48, 56);}
+h3 { @include fontClamp(32, 40, 44, 52);}
+h4 { @include fontClamp(28, 36, 40, 48);}
+h5 { @include fontClamp(26, 32, 36, 44);}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 ;
+}
+
+a[href^="tel"] {
+  white-space: nowrap;
+}
+
+.mb-24 {margin-bottom: rem(24);}
+.mb-16 {margin-bottom: rem(24);}
+
+.mt-48 {margin-top: rem(48);}
+.mt-24 {margin-top: rem(24);}
+
+.mr-24 {margin-right: rem(24);}
+.ml-24 {margin-left: rem(24);}
+
+.gap-16 {gap: rem(16);}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@include media-min($screen-lg-min) {
+  .flex-lg-row {
+    flex-direction: row;
+  }
+}
