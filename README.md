@@ -1,5 +1,12 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+1. По дизайну, то что бросилось: 
+  - Логика отображения школ, в большинстве областей не одна школа, это постарался учесть в таблице.
+  - Серая полоса 48 пикелей показалась отвлекающей.
+  - Еще мелочи в UI-kit черный текст на черном фоне.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+2. По апи не получилость стянуть данные, при запросе была ошибка CORS. 
+   Но данные хотелось бы видеть в чистом виде, без распарсивания data.data.list.
+   По структуре тоже не совсем понял почему в одной обасти одна школа. Или я апи недопонял))
+
+3. Все что наверстано, адаптивно.
